@@ -10,11 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= jquery
-//= opal-jquery
-
 //= require rails-ujs
-//   require turbolinks
+//= require turbolinks
 //= require_tree .
 //= require hyperloop-loader
 Opal.OpalHotReloader.$listen(25222, true)

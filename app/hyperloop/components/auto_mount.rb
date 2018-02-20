@@ -1,9 +1,10 @@
+require 'jquery'
+require 'opal-jquery'
+
 module Hyperloop
   def self.mount_all
-    query = '[data-hyperloop-mount]'
-    #Element['[data-hyperloop-mount]'].each do |mount_point|
-    `$('[data-hyperloop-mount]')`.each do |mount_point|
-      component_name = `mount_point.attr(query)`
+    Element['[data-hyperloop-mount]'].each do |mount_point|
+      component_name = mount_point.attr('data-hyperloop-mount')
       component = nil
       begin
         component = Object.const_get(component_name)
@@ -12,8 +13,8 @@ module Hyperloop
         `console.error(message)`
         next
       end
-      params = Hash[*Hash.new(`mount_point.data`).collect do |name, value|
-        [name.underscore, value] unless name == 'hyperloop-mount'
+      params = Hash[*mount_point.data.collect do |name, value|
+        [name.underscore, value] unless name == 'hyperloopMount'
       end.compact.flatten(1)]
       React.render(React.create_element(component, params), mount_point)
     end
